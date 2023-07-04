@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  train_model:
+    build:
+      context: ./train_model
+    image: train_model
+    networks:
+      - jenkins_network
+    volumes:
+      - jenkins_home:/compartilhado
+
+  app:
+    build:
+      context: ./app
+    image: app
+    networks:
+      - jenkins_network
+    volumes:
+      - jenkins_home:/compartilhado
+
+networks:
+  jenkins_network:
+
+volumes:
+  jenkins_home:

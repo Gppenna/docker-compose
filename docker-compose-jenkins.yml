@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  treat_raw_data:
+    build:
+      context: ./treat_raw_data
+    image: treat_raw_data
+    networks:
+      - jenkins_network
+    volumes:
+      - jenkins_home:/compartilhado
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - jenkins_network
+
+networks:
+  jenkins_network:
+
+volumes:
+  jenkins_home:
