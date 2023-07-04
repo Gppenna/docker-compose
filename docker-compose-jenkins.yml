@@ -1,14 +1,5 @@
 version: "3.8"
 services:
-  treat_raw_data:
-    build:
-      context: ./treat_raw_data
-    image: treat_raw_data
-    networks:
-      - jenkins_network
-    volumes:
-      - jenkins_home:/compartilhado
-
   jenkins:
     image: jenkins/jenkins:lts
     container_name: jenkins

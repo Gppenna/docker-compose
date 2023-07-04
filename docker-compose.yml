@@ -1,5 +1,14 @@
 version: "3.8"
 services:
+  treat_raw_data:
+    build:
+      context: ./treat_raw_data
+    image: treat_raw_data
+    networks:
+      - jenkins_network
+    volumes:
+      - shared_data:/compartilhado
+
   train_model:
     build:
       context: ./train_model
@@ -7,7 +16,7 @@ services:
     networks:
       - jenkins_network
     volumes:
-      - jenkins_home:/compartilhado
+      - shared_data:/compartilhado
 
   app:
     build:
@@ -16,10 +25,10 @@ services:
     networks:
       - jenkins_network
     volumes:
-      - jenkins_home:/compartilhado
+      - shared_data:/compartilhado
 
 networks:
   jenkins_network:
 
 volumes:
-  jenkins_home:
+  shared_data:

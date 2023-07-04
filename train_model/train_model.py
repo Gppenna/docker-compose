@@ -15,7 +15,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import VotingClassifier
 
 # Defina o caminho do arquivo CSV
-caminho_arquivo_csv = 'base_treinamento.csv'  # Substitua pelo caminho real do arquivo CSV
+caminho_arquivo_csv = '/compartilhado/base_treinamento.csv'  # Substitua pelo caminho real do arquivo CSV
 
 dataRefinadoNew = pd.read_csv(caminho_arquivo_csv, on_bad_lines='skip', sep=",")
 

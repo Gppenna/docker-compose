@@ -12,7 +12,5 @@ WORKDIR /train_model
 RUN pip install numpy pandas tqdm scikit-learn xgboost
 
 # Comando para treinar o modelo e mover o arquivo gerado para a pasta compartilhada
-CMD ["sh", "-c", "if [ -f /compartilhado/base_treinamento.csv ]; then python train_model.py; fi"] && \
-    if [ -f "modelo.pkl" ]; then \
-        mv modelo.pkl /compartilhado/; \
-    fi
+CMD ["sh", "-c", "if [ -f /compartilhado/base_treinamento.csv ]; then python train_model.py; fi && \
+                  if [ -f modelo.pkl ]; then mv modelo.pkl /compartilhado/; fi"]
