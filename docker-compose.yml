@@ -1,6 +1,7 @@
 version: "3.8"
 services:
   treat_raw_data:
+    container_name: treat_raw_data
     build:
       context: ./treat_raw_data
     image: treat_raw_data
@@ -10,6 +11,7 @@ services:
       - shared_data:/compartilhado
 
   train_model:
+    container_name: train_model
     build:
       context: ./train_model
     image: train_model
@@ -19,6 +21,7 @@ services:
       - shared_data:/compartilhado
 
   app:
+    container_name: app
     build:
       context: ./app
     image: app

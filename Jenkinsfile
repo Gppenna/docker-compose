@@ -14,10 +14,22 @@ pipeline {
       }
     }
 
-    stage('Iniciar Container') {
+    stage('Build dos Containeres') {
       steps {
-        sh 'docker compose up -d'
+        sh 'docker compose build' 
         sh 'docker compose ps'
+      }
+    }
+
+    stage('Iniciar Container - treat_raw_data') {
+      steps {
+        sh 'docker compose up -d --wait treat_raw_data' 
+      }
+    }
+
+    stage('Iniciar Container - train_model') {
+      steps {
+        sh 'docker compose up -d --wait train_model' 
       }
     }
   }
