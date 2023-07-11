@@ -10,8 +10,8 @@ pipeline {
 
     stage('Iniciar Container') {
       steps {
-        sh 'docker compose up -d --no-color --wait'
-        sh 'docker compose ps'
+        sh 'docker version'
+        sh 'docker compose version'
       }
     }
   }
