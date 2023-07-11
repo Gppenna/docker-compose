@@ -32,6 +32,7 @@ pipeline {
       steps {
         sh 'docker compose up -d --wait train_model' 
         sh 'docker wait train_model'
+        sh 'docker logs app'
       }
     }
 

@@ -1,15 +1,34 @@
 # docker-compose
 
-Para o funcionamento, baixe o CSV https://drive.google.com/drive/folders/16I0P7Gb3tB70kdKCWCx9PcGP5aMQEOWX?usp=sharing
+Para o funcionamento siga os passos abaixo
 
-Coloque o CSV na pasta de raw data.
+Para build e execução da imagem Jenkins execute na ordem:
 
-Para build e execução da imagem Jenkins execute: 
 ```
-docker-compose -f docker-compose-jenkins.yml up -d
+docker network create jenkins
 ```
 
-Para build e execução das imagens de tratamento dos dados, treinamento do modelo e API de predição: 
 ```
-docker-compose -f docker-compose.yml up -d
+docker run --name jenkins-docker --rm --detach ^
+  --privileged --network jenkins --network-alias docker ^
+  --env DOCKER_TLS_CERTDIR=/certs ^
+  --volume jenkins-docker-certs:/certs/client ^
+  --volume jenkins-data:/var/jenkins_home ^
+  --publish 2376:2376 ^
+  docker:dind
 ```
+
+```
+docker build -t myjenkins-blueocean:2.401.2-1 .
+```
+
+```
+docker run --name jenkins-blueocean --restart=on-failure --detach ^
+  --network jenkins --env DOCKER_HOST=tcp://docker:2376 ^
+  --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 ^
+  --volume jenkins-data:/var/jenkins_home ^
+  --volume jenkins-docker-certs:/certs/client:ro ^
+  --publish 8080:8080 --publish 50000:50000 myjenkins-blueocean:2.401.2-1
+```
+
+Para configuração da pipeline no Jenkins, configure um novo job de pipeline utilizando o Jenkinsfile neste repositório.
