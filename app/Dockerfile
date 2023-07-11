@@ -8,7 +8,7 @@ COPY app.py /app/
 WORKDIR /app
 
 # Instala as dependências do script Python
-RUN pip install scikit-learn pandas
+RUN pip install scikit-learn pandas flask
 
 # Verifica se o arquivo modelo.pkl existe em /app e, se existir, executa o comando padrão
 CMD ["sh", "-c", "if [ -f /compartilhado/modelo.pkl ]; then python app.py; fi"]

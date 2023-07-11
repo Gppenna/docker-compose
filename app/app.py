@@ -1,31 +1,29 @@
 import pickle
 import pandas as pd
+from flask import Flask, jsonify
 
 # Carregar o modelo treinado
 with open('/compartilhado/modelo.pkl', 'rb') as arquivo:
     model = pickle.load(arquivo)
 
-def prever():
-  # Obter os dados da requisição em formato JSON
-  json_data = {
-    "0": [1.0],
-    "1": [0.0],
-    "2": [0.916073],
-    "3": [0.9125],
-    "4": [0.253514],
-    "5": [0.861702],
-    "6": [1.0]
-  }
+with open('/compartilhado/scaler.sav', 'rb') as arquivo2:
+    scaler = pickle.load(arquivo2)    
 
-  df_test = pd.DataFrame(json_data)
+app = Flask(__name__)
+@app.route('/predict/<dic>')
+def homepage(dic):
+    
+    dicAux = dic
+       
+    list_ = list(map(float, dic.split()))   
 
-  print(df_test)
-
-  # Fazer a previsão usando o modelo carregado
-  previsao = model.predict(df_test)
-
-  # Retornar a previsão em formato JSON
-  print('Previsão (1: Aceita, 0: Bloqueia): ', previsao)
+    x_scaler = scaler.transform([list_])  
+    
+    prediction = model.predict(x_scaler)
+  
+    resp = prediction[0][1]
+    
+    return jsonify(str(resp))
 
 if __name__ == '__main__':
-    prever()
+    app.run()
