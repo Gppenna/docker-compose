@@ -8,10 +8,16 @@ pipeline {
       }
     }
 
+    stage('Limpar Docker') {
+      steps {
+        sh 'docker system prune -a --volumes -f'
+      }
+    }
+
     stage('Iniciar Container') {
       steps {
-        sh 'docker version'
-        sh 'docker compose version'
+        sh 'docker compose up -d'
+        sh 'docker compose ps'
       }
     }
   }
