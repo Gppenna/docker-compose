@@ -27,6 +27,10 @@ dataRefinadoNewX = dataRefinadoNew.drop([
 scaler = MinMaxScaler(feature_range=(0, 1))
 scaler.fit(pd.DataFrame(dataRefinadoNewX))
 
+# SALVANDO em pickle
+scalerfile = 'scaler.sav'
+pickle.dump(scaler, open(scalerfile, 'wb'))
+
 dataRefinadoNewXNormalizado = pd.DataFrame(scaler.transform(dataRefinadoNewX))
 
 x_train, x_test, y_train, y_test = train_test_split(dataRefinadoNewXNormalizado, dataRefinadoNewY, test_size=0.20,stratify = dataRefinadoNewY)
