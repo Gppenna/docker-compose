@@ -39,8 +39,8 @@ pipeline {
     stage('Iniciar Container - app') {
       steps {
         sh 'docker compose up -d --wait app' 
-        sh 'docker wait app'
         sh 'docker logs app'
+        sh 'docker compose ps'
       }
     }
   }
