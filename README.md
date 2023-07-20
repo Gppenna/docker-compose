@@ -1,5 +1,8 @@
 # docker-compose
 
+Link para o relatório: https://docs.google.com/document/d/1XqMknw4WoxfroAbXLVDI1A5fodR3pDD2j7cn84_fpIE/edit?usp=sharing
+Link para slide do ciclo de vida MLOps: https://docs.google.com/presentation/d/12dGEZVKkjzFh6JAW1-CsyFOOUSu-YyAZWPLeRxn_gNE/edit?usp=sharing
+
 Para o funcionamento siga os passos abaixo
 
 Para build e execução da imagem Jenkins execute na ordem:
